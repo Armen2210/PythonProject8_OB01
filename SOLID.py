@@ -1,3 +1,16 @@
+## SOLID - принципы ООП
+##Принципы SOLID:
+## принцип единственной ответственности (Single Responsibility Principle);
+## принцип открытости/закрытости (Open closed Principle);
+## принцип подстановки Барбары Лисков (Liskov substitution Principle);
+## принцип разделения интерфейсов (Interface Segregation Principle);
+## принцип инверсии зависимости (Dependency Inversion Principle)
+
+
+
+
+
+# # Single Responsibility Principle - принцип единственной ответственности
 # # Пример привычного создания классов. Класс UserManager выполняет сразу несколько функций, которые связаны между собой.
 # # Это не соответствует принципу SOLID.
 
@@ -75,8 +88,8 @@
 #         self.formated.format(self)
 #
 #
-# report = Report("заголовок отчета", "текст отчета", TextFormated()) 
-# #report = Report("заголовок отчета", "текст отчета", HtmlFormated())
+# report = Report("заголовок отчета", "текст отчета", TextFormated())
+# # report = Report("заголовок отчета", "текст отчета", HtmlFormated())
 #
 # report.docPrinter() # выводит в консоль текст отчета
 
