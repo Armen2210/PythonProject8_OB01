@@ -60,12 +60,13 @@ class Monster:
         print("Монстр атакует воина.")
 
 
-def fight(fighter, monster):
+def fight(fighter):
     fighter.weapon.attack()
-    monster.attack()
+
 
 Barbarian = Fighter("Barbarian")
 Barbarian.change_weapon(Sword())
 #Barbarian.change_weapon(Bow())
 monster = Monster()
-fight(Barbarian, monster)
+
+fight(Barbarian)
