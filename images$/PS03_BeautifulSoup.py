@@ -1,8 +1,9 @@
 import requests
 from bs4 import BeautifulSoup
+from googletrans import Translator
 
 
-
+## Пример использования BeautifulSoup
 # url = "http://quotes.toscrape.com/"
 #
 # response = requests.get(url)
@@ -52,3 +53,5 @@ def word_game():
         if play_again.lower() != "да":
             print("Спасибо за игру!")
             break
+
+word_game()
