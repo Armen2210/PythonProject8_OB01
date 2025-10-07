@@ -37,17 +37,20 @@ def get_english_words():
 
 def word_game():
     print("Добро пожаловать в игру")
+    translator = Translator()
     while True:
         word_dict = get_english_words()
         word = word_dict.get("english_words")
+        word_ru = translator.translate(word, dest="ru").text
         word_definition = word_dict.get("word_definition")
+        word_ru_definition = translator.translate(word_definition, dest="ru").text
 
-        print(f"Значение слова - {word_definition}")
+        print(f"Значение слова - {word_ru_definition}")
         user = input("Что это за слово?")
-        if user == word:
+        if user == word_ru:
             print("Правильно!")
         else:
-            print(f"Неправильно! Правильный ответ - {word}")
+            print(f"Неправильно! Правильный ответ - {word_ru}")
 
         play_again = input("Хотите сыграть еще раз? (да/нет)")
         if play_again.lower() != "да":
