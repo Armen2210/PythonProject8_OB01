@@ -19,22 +19,24 @@
 import  requests
 import pprint
 
+# url = "https://api.github.com/search/repositories"
+#
 # params = {
 #     "q": "html"
 # }
 #
-# responce = requests.get("https://api.github.com/search/repositories", params=params)
-# print(responce.status_code)
+# responce = requests.get(url, params=params)
+# print(f"Status code: {responce.status_code}")
 # pprint.pprint(responce.content)
 
 # Задание 2
 # url = "https://jsonplaceholder.typicode.com/posts"
 #
-# data = {
+# params = {
 #     "userId": "1"
 # }
 #
-# responce = requests.get(url, data=data)
+# responce = requests.get(url, params=params)
 # pprint.pprint(responce.content)
 
 # Задание 3
@@ -46,6 +48,6 @@ data = {
     'userId': 1
 }
 
-responce = requests.post(url, data=data)
+responce = requests.post(url, json=data)
 print(responce.status_code)
-pprint.pprint(responce.content)
+print(responce.json())
