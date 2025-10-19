@@ -4,18 +4,15 @@ import scrapy
 class DivannewparsSpider(scrapy.Spider):
     name = "divannewpars"
     allowed_domains = ["https://www.divan.ru/sankt-peterburg/"]
-    start_urls = ["https://www.divan.ru/sankt-peterburg/category/svet?sort=1"]
+    start_urls = ["https://www.divan.ru/sankt-peterburg/category/svet"]
 
     def parse(self, response):
-        divans = response.xpath('div.Ud0K')
+        divans = response.css('div.ProductCard_container__HLDPH')
         for divan in divans:
             yield {
-                # Ссылки и теги получаем с помощью консоли на сайте
-                # Создаём словарик названий, используем поиск по диву, а внутри дива — по тегу span
-                'name': divan.css('div.lsooF span::text').get(),
-                # Создаём словарик цен, используем поиск по диву, а внутри дива — по тегу span
-                'price': divan.css('div.pY3d2 span::text').get(),
-                # Создаём словарик ссылок, используем поиск по тегу "a", а внутри тега — по атрибуту
-                # Атрибуты — это настройки тегов
+                'name': divan.css('div.ProductCard_info__c9Z_4 span::text').get(),
+                'price': divan.css('div.ProductCard_wrapperPrice__91mtE span::text').get(),
                 'url': divan.css('a').attrib['href']
             }
+
+
