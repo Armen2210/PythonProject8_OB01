@@ -3,8 +3,9 @@
 import time
 import csv
 from selenium import webdriver
-from selenium.webdriver import Keys
+#from selenium.webdriver import Keys
 from selenium.webdriver.common.by import By
+from selenium.common.exceptions import NoSuchElementException, TimeoutException, WebDriverException
 
 # url = "https://quotes.toscrape.com/"
 #
@@ -57,27 +58,58 @@ url  = "https://tomsk.hh.ru/vacancies/programmist"
 driver.get(url)
 time.sleep(5)
 
-vacancies = driver.find_elemens(By.CLASS_NAME, 'vacancy-card--n77Dj8VIUF0yM')
+vacancies = driver.find_elements(By.CLASS_NAME, 'vacancy-card--n77Dj8TY8VIUF0yM')
+print(f"[INFO] Найдено карточек вакансий: {len(vacancies)}")
 
 parsed_data = []
 
-for vacancy in vacancies:
+for index, vacancy in enumerate(vacancies, start=1):
     try:
-        title = vacancy.find_element(By.CSS_SELECTOR, 'span.magritte-text___tkzIl_6-0-13').text
-        company = vacancy.find_element(By.CSS_SELECTOR, 'span.magritte-text___tkzIl_6-0-13').text
-        salary = vacancy.find_element(By.CSS_SELECTOR, 'span.magritte-text_typography-label-1-regular___pi3R-_4-2-4"').text
-        link = vacancy.find_element(By.CSS_SELECTOR, 'a.magritte-button').get_attribute('href')
-    except:
-        print('Произошла ошибка при парсинге')
-        continue
+        print(f"\n[INFO] Обработка вакансии №{index}")
 
-    parsed_data.append([title, company, salary, link])
+        try:
+            title_element = vacancy.find_element(By.CSS_SELECTOR, 'span.magritte-text___tkzIl_6-0-13')
+            title = title_element.text
+            link = title_element.get_attribute('href')
+        except NoSuchElementException:
+            print("❌ Не найдено название вакансии")
+            title = "Нет данных"
+            link = "Нет ссылки"
+
+        try:
+            company = vacancy.find_element(By.CSS_SELECTOR, 'span.magritte-text___tkzIl_6-0-13').text
+        except NoSuchElementException:
+            print("⚠️ Не найдена компания")
+            company = "Не указано"
+
+        try:
+            salary = vacancy.find_element(By.CSS_SELECTOR, 'div.narrow-container--HaV4hduxPuElpx0V').text
+        except NoSuchElementException:
+            print("⚠️ Зарплата не найдена")
+            salary = "Не указана"
+
+        try:
+            link = vacancy.find_element(By.CSS_SELECTOR, 'a.magritte-link___b4rEM_6-0-13').get_attribute('href')
+        except NoSuchElementException:
+            print("⚠️ Ссылка не найдена")
+            link = "Не указана"
+
+        parsed_data.append([title, company, salary, link])
+        print(f"✅ Успешно: {title} — {company} — {salary} - {link}")
+
+    except Exception as e:
+        print(f"🚨 Ошибка при парсинге вакансии №{index}: {e}")
+        continue
 
 with open('hh.csv', 'w', newline='', encoding='utf-8') as file:
     writer = csv.writer(file)
     writer.writerow(['Название вакансии', 'Компания', 'Зарплата', 'Ссылка'])
     writer.writerows(parsed_data)
 
-
+print(f"\n[INFO] Готово! Сохранено {len(parsed_data)} записей в hh.csv")
 
 driver.quit()
+
+
+
+
