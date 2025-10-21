@@ -68,22 +68,20 @@ for index, vacancy in enumerate(vacancies, start=1):
         print(f"\n[INFO] Обработка вакансии №{index}")
 
         try:
-            title_element = vacancy.find_element(By.CSS_SELECTOR, 'span.magritte-text___tkzIl_6-0-13')
-            title = title_element.text
-            link = title_element.get_attribute('href')
+            title = vacancy.find_element(By.CSS_SELECTOR, '[data-qa="serp-item__title-text"]').text
         except NoSuchElementException:
             print("❌ Не найдено название вакансии")
             title = "Нет данных"
-            link = "Нет ссылки"
+
 
         try:
-            company = vacancy.find_element(By.CSS_SELECTOR, 'span.magritte-text___tkzIl_6-0-13').text
+            company = vacancy.find_element(By.CSS_SELECTOR, '[data-qa="vacancy-serp__vacancy-employer-text"]').text
         except NoSuchElementException:
             print("⚠️ Не найдена компания")
             company = "Не указано"
 
         try:
-            salary = vacancy.find_element(By.CSS_SELECTOR, 'div.narrow-container--HaV4hduxPuElpx0V').text
+            salary = vacancy.find_element(By.CSS_SELECTOR, 'span[class*="magritte-text_typography-label-1-regular"]').text
         except NoSuchElementException:
             print("⚠️ Зарплата не найдена")
             salary = "Не указана"
