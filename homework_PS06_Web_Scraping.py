@@ -22,7 +22,7 @@ for index, sofa in enumerate(sofas, start=1):
         print(f"\n[INFO] Обработка карточки товара №{index}")
 
         try:
-            title = sofa.find_element(By.CSS_SELECTOR, "a.ProductCard_name__zj1lH").text
+            title = sofa.find_element(By.CSS_SELECTOR, 'div.ProductCard_info__c9Z_4').text
         except NoSuchElementException:
             print("❌ Не найдено название позиции")
             title = "Нет данных"
@@ -41,7 +41,7 @@ for index, sofa in enumerate(sofas, start=1):
             actualPrice = expiredPrice = "Не указано"
 
         try:
-            link = sofa.find_element(By.CSS_SELECTOR, "a.ProductCard_name__zj1lH").get_attribute('href')
+            link = sofa.find_element(By.CSS_SELECTOR, 'a.url').get_attribute('href')
         except NoSuchElementException:
             print("⚠️ Ссылка не найдена")
             link = "Не указана"
