@@ -22,32 +22,33 @@ for index, sofa in enumerate(sofas, start=1):
         print(f"\n[INFO] Обработка карточки товара №{index}")
 
         try:
-            title = sofa.find_element(By.CSS_SELECTOR, 'div.ProductCard_info__c9Z_4').text
+            title = sofa.find_element(By.CSS_SELECTOR, "span[itemprop='name']").text.strip()
         except NoSuchElementException:
             print("❌ Не найдено название позиции")
             title = "Нет данных"
 
-        try:
-            prices = sofa.find_elements(By.CSS_SELECTOR, "span[data-testid='price']")
-            if len(prices) == 2:
-                actualPrice = prices[0].text
-                expiredPrice = prices[1].text
-            elif len(prices) == 1:
-                actualPrice = prices[0].text
-                expiredPrice = "—"
-            else:
-                actualPrice = expiredPrice = "Не указано"
-        except NoSuchElementException:
-            actualPrice = expiredPrice = "Не указано"
 
         try:
-            link = sofa.find_element(By.CSS_SELECTOR, 'a.url').get_attribute('href')
+            actual_price = sofa.find_element(By.CSS_SELECTOR, "meta[itemprop='price']").get_attribute("content").strip()
+        except NoSuchElementException:
+            actual_price = "—"
+
+
+        try:
+            expired_price = sofa.find_element(By.XPATH, ".//*[contains(@class,'ExpiredPrice_expiredPrice')]").text.strip()
+        except NoSuchElementException:
+            expired_price = "—"
+
+
+        try:
+            link_el = sofa.find_element(By.XPATH, ".//a[starts-with(@href, '/product/')]")
+            link = "https://www.divan.ru" + link_el.get_attribute("href")
         except NoSuchElementException:
             print("⚠️ Ссылка не найдена")
             link = "Не указана"
 
-        parsed_data.append([title, actualPrice, expiredPrice, link])
-        print(f"✅ Успешно: {title} — {actualPrice} — {expiredPrice} - {link}")
+        parsed_data.append([title, actual_price, expired_price, link])
+        print(f"✅ Успешно: {title} — {actual_price} — {expired_price} - {link}")
 
     except Exception as e:
         print(f"🚨 Ошибка при парсинге карточки товара №{index}: {e}")
