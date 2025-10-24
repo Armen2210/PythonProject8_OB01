@@ -30,4 +30,5 @@ print(df)
 
 middle_salary = df.groupby('City')['Salary'].mean()
 print(middle_salary)
+df.to_csv('output_Homework_AZ01_Numpy_Pandas.csv', index=False)
 
