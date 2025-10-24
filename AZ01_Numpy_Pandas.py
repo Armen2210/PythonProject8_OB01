@@ -21,7 +21,7 @@ import pandas as pd
 # print(df[df['Social support'] > 1.400]) # выводит данные по выбранному столбцу со значением больше 1.400
 
 
-df = pd.read_csv("csv_files/hh.csv")
+# df = pd.read_csv("csv_files/hh.csv")
 
 # df['Test'] = [new for new in range(29)] # добавили столбец
 # print(df)
@@ -29,5 +29,31 @@ df = pd.read_csv("csv_files/hh.csv")
 # df.drop('Test', axis=1, inplace=True) #  удаляем объект, который указываем; axis=1 - удаление столбцов, axis=0 - удаление строк; inplace=True - изменения вносятся в исходный дата фрэйм, inplace=False - возвращается измененный дата фрэйм, оригинальный не меняется
 # print(df)
 
-df.drop('Test', axis=1, inplace=True) #  удаляем объект, который указываем; axis=1 - удаление столбцов, axis=0 - удаление строк; inplace=True - изменения вносятся в исходный дата фрэйм, inplace=False - возвращается измененный дата фрэйм, оригинальный не меняется
-print(df)
+# print(df)
+# df.drop(28, axis=0, inplace=True) #  удаляем объект, который указываем; axis=1 - удаление столбцов, axis=0 - удаление строк; inplace=True - изменения вносятся в исходный дата фрэйм, inplace=False - возвращается измененный дата фрэйм, оригинальный не меняется
+# print(df)
+
+
+
+# df = pd.read_csv("csv_files/animal.csv")
+# print(df)
+
+# df.fillna(0, inplace=True) # fillna - эта команда заполнит пропуски значением из value
+# print(df)
+#
+# df.dropna(inplace=True) # dropna - эта команда удалит строки в которых значение NaN
+
+# group = df.groupby('Пища')['Средняя продолжительность жизни'].mean() # группируем по значению, затем высчитываем среднее с помощью"mean()"
+# print(group)
+
+
+
+data = {
+    'Name': ['John', 'Anna', 'Peter', 'Linda'],
+    'Age': [28, 22, 34, 42],
+    'City': ['New York', 'Paris', 'London', 'Berlin']
+}
+
+df = pd.DataFrame(data)
+
+df.to_csv('output.csv', index=False) # создаем новый файл csv
