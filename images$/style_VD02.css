@@ -1,0 +1,25 @@
+
+.card{
+    width: 400px;
+    height: 700px;
+    background-color: gold;
+    border-radius: 20px;
+}
+
+.photo{
+    height: 30%;
+    padding: 10px;
+
+
+}
+
+.info{
+    height: 40%;
+    padding: 100px;
+}
+
+img{
+    position: relative;
+    left: 15%;
+    border-radius: 10px;
+}

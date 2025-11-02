@@ -1,0 +1,57 @@
+
+body {
+    background-color: #f8f6f5;
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+}
+
+.cards-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 25px;
+    padding: 30px;
+    max-width: 1600px;
+    margin: auto;
+}
+
+.card {
+    width: 350px;
+    background: #fff;
+    border-radius: 18px;
+    padding: 15px;
+    text-align: center;
+    transition: transform .3s, box-shadow .3s;
+}
+
+.card:hover {
+    transform: scale(1.03);
+    box-shadow: 0 8px 22px rgba(0,0,0,0.2);
+}
+
+.photo img {
+    width: 100%;
+    height: 260px;
+    object-fit: cover;
+    border-radius: 14px;
+}
+
+.info h1 {
+    font-size: 22px;
+    margin: 14px 0 8px;
+}
+
+.info p {
+    font-size: 14px;
+    line-height: 1.4;
+}
+
+.card:nth-child(1) { background-color: hsl(10, 60%, 88%); }
+.card:nth-child(2) { background-color: hsl(30, 60%, 88%); }
+.card:nth-child(3) { background-color: hsl(50, 60%, 88%); }
+.card:nth-child(4) { background-color: hsl(80, 60%, 88%); }
+.card:nth-child(5) { background-color: hsl(120, 60%, 88%); }
+.card:nth-child(6) { background-color: hsl(180, 60%, 88%); }
+.card:nth-child(7) { background-color: hsl(210, 60%, 88%); }
+.card:nth-child(8) { background-color: hsl(260, 60%, 88%); }
+
